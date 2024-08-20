@@ -1,0 +1,105 @@
+import 'package:flutter/material.dart';
+
+void main() {
+  runApp(TaskManagerApp());
+}
+
+class TaskManagerApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'Task Manager',
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
+      ),
+      home: TaskListScreen(),
+    );
+  }
+}
+
+class TaskListScreen extends StatefulWidget {
+  @override
+  _TaskListScreenState createState() => _TaskListScreenState();
+}
+
+class _TaskListScreenState extends State<TaskListScreen> {
+  final List<Task> _tasks = [];
+
+  void _addTask(String name) {
+    setState(() {
+      _tasks.add(Task(name: name));
+    });
+  }
+
+  void _toggleTaskCompletion(int index) {
+    setState(() {
+      _tasks[index].isCompleted = !_tasks[index].isCompleted;
+    });
+  }
+
+  void _removeTask(int index) {
+    setState(() {
+      _tasks.removeAt(index);
+    });
+  }
+
+  void _showAddTaskScreen() {
+    showDialog(
+      context: context,
+      builder: (ctx) => AlertDialog(
+        title: Text('Add Task'),
+        content: TextField(
+          decoration: InputDecoration(labelText: 'Task Name'),
+          onSubmitted: (value) {
+            _addTask(value);
+            Navigator.of(ctx).pop();
+          },
+        ),
+        actions: [
+          TextButton(
+            child: Text('Cancel'),
+            onPressed: () => Navigator.of(ctx).pop(),
+          ),
+        ],
+      ),
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Task Manager'),
+      ),
+      body: ListView.builder(
+        itemCount: _tasks.length,
+        itemBuilder: (ctx, index) {
+          final task = _tasks[index];
+          return ListTile(
+            title: Text(
+              task.name,
+              style: TextStyle(
+                decoration: task.isCompleted ? TextDecoration.lineThrough : null,
+              ),
+            ),
+            trailing: IconButton(
+              icon: Icon(Icons.delete),
+              onPressed: () => _removeTask(index),
+            ),
+            leading: Checkbox(
+              value: task.isCompleted,
+              onChanged: (value) => _toggleTaskCompletion(index),
+            ),
+            onTap: () {
+              // Optional: Navigate to edit task screen
+            },
+          );
+        },
+      ),
+      floatingActionButton: FloatingActionButton(
+        child: Icon(Icons.add),
+        onPressed: _showAddTaskScreen,
+      ),
+    );
+  }
+}
