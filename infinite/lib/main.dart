@@ -19,7 +19,7 @@ class MyApp extends StatelessWidget {
                 ),
               ),
               // Aqui você adiciona o seu componente
-              Icon(Icons.infinity), // Exemplo: um ícone de infinito
+              Image.asset(,), // Exemplo: um ícone de infinito
             ],
           ),
         ),
