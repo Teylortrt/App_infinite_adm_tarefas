@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 
 class RegisterScreen extends StatelessWidget {
-  const RegisterScreen({super.key});
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -11,7 +9,7 @@ class RegisterScreen extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            const Text(
+            Text(
               'Crie sua conta',
               style: TextStyle(
                 color: Colors.white,
@@ -19,7 +17,7 @@ class RegisterScreen extends StatelessWidget {
                 fontWeight: FontWeight.bold,
               ),
             ),
-            const SizedBox(height: 20),
+            SizedBox(height: 20),
             TextField(
               keyboardType: TextInputType.emailAddress,
               decoration: InputDecoration(
@@ -31,7 +29,7 @@ class RegisterScreen extends StatelessWidget {
                 ),
               ),
             ),
-            const SizedBox(height: 10),
+            SizedBox(height: 10),
             TextField(
               obscureText: true,
               decoration: InputDecoration(
@@ -43,7 +41,7 @@ class RegisterScreen extends StatelessWidget {
                 ),
               ),
             ),
-            const SizedBox(height: 10),
+            SizedBox(height: 10),
             TextField(
               obscureText: true,
               decoration: InputDecoration(
@@ -55,17 +53,17 @@ class RegisterScreen extends StatelessWidget {
                 ),
               ),
             ),
-            const SizedBox(height: 20),
+            SizedBox(height: 20),
             ElevatedButton(onPressed: () {
               
             },
+              child: Text('Criar Conta'),
               style: ElevatedButton.styleFrom(
                 
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(10),
                 ),
               ),
-              child: Text('Criar Conta'),
             ),
           ],
         ),
