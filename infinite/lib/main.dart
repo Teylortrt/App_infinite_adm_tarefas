@@ -1,25 +1,28 @@
 import 'package:flutter/material.dart';
+void main() {
+  runApp(MyApp());
+}
 
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
-        backgroundColor: Color(0xFF1980BA),
+        backgroundColor: Colors.blue,
         body: Center(
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
+              Image.asset('assets/infinite.png'),
+              SizedBox(width: 10),
               Text(
                 'infinite',
                 style: TextStyle(
-                  fontSize: 48,
+                  fontSize: 24,
                   fontWeight: FontWeight.bold,
-                  color: Colors.black,
+                  color: Color(0xFF0198BA), // Aqui está a nova cor
                 ),
               ),
-              // Aqui você adiciona o seu componente
-              Image.asset(,), // Exemplo: um ícone de infinito
             ],
           ),
         ),
