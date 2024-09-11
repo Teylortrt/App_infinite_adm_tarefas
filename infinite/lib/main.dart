@@ -20,7 +20,7 @@ class MyApp extends StatelessWidget {
                 style: TextStyle(
                   fontSize: 24,
                   fontWeight: FontWeight.bold,
-                  color: Color(0xFF0198BA), // Aqui está a nova cor
+                  color: Color(0xFF1980BA), // Aqui está a nova cor
                 ),
               ),
             ],
