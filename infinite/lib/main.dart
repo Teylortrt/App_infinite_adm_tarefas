@@ -1,23 +1,23 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-
 void main() {
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
-        backgroundColor: Colors.blue,
+        backgroundColor: const Color(0xFF1980BA),
         body: Center(
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Image.asset('assets/infinite.png'),
-              SizedBox(width: 10),
-              Text(
+              const SizedBox(width: 10),
+              const Text(
                 'infinite',
                 style: TextStyle(
                   fontSize: 24,
