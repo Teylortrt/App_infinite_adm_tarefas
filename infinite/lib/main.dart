@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 void main() {
   runApp(const MyApp());
 }
@@ -14,18 +15,22 @@ class MyApp extends StatelessWidget {
         body: Center(
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              Image.asset('assets/infinite.png'),
-              const SizedBox(width: 10),
-              const Text(
-                'infinite',
-                style: TextStyle(
-                  fontSize: 24,
-                  fontWeight: FontWeight.bold,
-                  color: Color(0xFF1980BA), // Aqui está a nova cor
-                ),
-              ),
-            ],
+  const Text(
+    'infinite',
+    style: TextStyle(
+      fontSize: 50,
+      fontWeight: FontWeight.bold,
+    ),
+  ),
+  const SizedBox(width: 5),
+  Image.asset(
+    'assets/infinite.png',
+    width: 100,
+    height:50,
+  ),
+],
           ),
         ),
       ),

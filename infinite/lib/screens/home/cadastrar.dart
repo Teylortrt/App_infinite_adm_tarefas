@@ -6,7 +6,7 @@ class RegisterScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xFF1980BA),
+      backgroundColor: const Color(0xFF1980BA),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -65,7 +65,7 @@ class RegisterScreen extends StatelessWidget {
                   borderRadius: BorderRadius.circular(10),
                 ),
               ),
-              child: Text('Criar Conta'),
+              child: const Text('Criar Conta'),
             ),
           ],
         ),

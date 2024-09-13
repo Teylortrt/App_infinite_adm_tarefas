@@ -65,7 +65,7 @@ class RegisterScreen extends StatelessWidget {
                   borderRadius: BorderRadius.circular(10),
                 ),
               ),
-              child: Text('Criar Conta'),
+              child: const Text('Criar Conta'),
             ),
           ],
         ),

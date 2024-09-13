@@ -6,12 +6,12 @@ class LoginScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.blue,
+      backgroundColor:const Color(0xFF1980BA),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Image.asset('assets/images/infinite.png'), // Substitua pelo caminho do seu ícone
+            Image.asset('assets/infinite.png'), // Substitua pelo caminho do seu ícone
             const Text(
               'Bem-vindo de volta!',
               style: TextStyle(
@@ -53,7 +53,7 @@ class LoginScreen extends StatelessWidget {
                   borderRadius: BorderRadius.circular(10),
                 ),
               ),
-              child: Text('Conecte-se'),
+              child:const Text('Conecte-se'),
             ),
           ],
         ),

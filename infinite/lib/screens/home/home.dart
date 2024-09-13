@@ -5,6 +5,8 @@ void main() {
 }
 
 class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -18,12 +20,14 @@ class MyApp extends StatelessWidget {
 }
 
 class HomeScreen extends StatelessWidget {
+  const HomeScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xFF00BFFF), // Cor de fundo
+      backgroundColor: const Color(0xFF00BFFF), // Cor de fundo
       appBar: AppBar(
-        title: Text('Infinite'),
+        title: const Text('Infinite'),
         backgroundColor: Colors.blueAccent,
       ),
       body: Center(
@@ -37,14 +41,14 @@ class HomeScreen extends StatelessWidget {
               decoration: BoxDecoration(
                 color: Colors.white,
                 borderRadius: BorderRadius.circular(15),
-                image: DecorationImage(
+                image: const DecorationImage(
                   image: AssetImage('assets/produtividade.png'), // Update with your image path
                   fit: BoxFit.cover,
                 ),
               ),
             ),
-            SizedBox(height: 20),
-            Text(
+            const SizedBox(height: 20),
+            const Text(
               'Stop! Pensei a solução.\nMas não tudo ao mesmo tempo.',
               textAlign: TextAlign.center,
               style: TextStyle(
@@ -52,7 +56,7 @@ class HomeScreen extends StatelessWidget {
                 color: Colors.white,
               ),
             ),
-            SizedBox(height: 40),
+            const SizedBox(height: 40),
             // Botões interativos
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -61,13 +65,13 @@ class HomeScreen extends StatelessWidget {
                   onPressed: () {
                     // Ação para "Iniciar Sessão"
                   },
-                  child: Text('Iniciar Sessão'),
+                  child: const Text('Iniciar Sessão'),
                 ),
                 ElevatedButton(
                   onPressed: () {
                     // Ação para "Criar Conta"
                   },
-                  child: Text('Criar Conta'),
+                  child: const Text('Criar Conta'),
                 ),
               ],
             ),
