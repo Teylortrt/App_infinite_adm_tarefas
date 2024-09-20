@@ -7,24 +7,25 @@ environment:
   sdk: ^3.3.0
 
 dependencies:
+  email_validator: ^3.0.0
   flutter:
     sdk: flutter
+  shared_preferences: ^2.3.2
 
 dev_dependencies:
+  flutter_lints: ^4.0.0
   flutter_test:
     sdk: flutter
-  flutter_lints: ^4.0.0
 
 flutter:
   uses-material-design: true
   assets:
-  - assets/infinite.png
-  - assets/barra.png
-  - assets/calendario.png
-  - assets/certinho.png
-  - assets/configuracoes.png
-  - assets/home.png
-  - assets/pesquisar.png
-  - assets/lixeira.png
-  - assets/produtividade.png
-
+    - assets/infinite.png
+    - assets/barra.png
+    - assets/calendario.png
+    - assets/certinho.png
+    - assets/configuracoes.png
+    - assets/home.png
+    - assets/pesquisar.png
+    - assets/lixeira.png
+    - assets/produtividade.png
