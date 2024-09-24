@@ -27,20 +27,20 @@ class CustomTextField extends StatelessWidget {
         validator: validator,
         decoration: InputDecoration(
           labelText: label,
-          labelStyle: TextStyle(color: Colors.grey), // Rótulo em cinza
+          labelStyle: const TextStyle(color: Colors.grey), // Rótulo em cinza
           filled: true,
           fillColor: Colors.grey[200], // Cor de fundo em cinza claro
           border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(30), // Borda circular
-            borderSide: BorderSide(color: Colors.grey), // Cor da borda
+            borderSide: const BorderSide(color: Colors.grey), // Cor da borda
           ),
           enabledBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(30), // Borda ao habilitar
-            borderSide: BorderSide(color: Colors.grey), // Cor da borda
+            borderSide: const BorderSide(color: Colors.grey), // Cor da borda
           ),
           focusedBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(30), // Borda ao focar
-            borderSide: BorderSide(color: Colors.blue), // Cor da borda ao focar
+            borderSide: const BorderSide(color: Colors.blue), // Cor da borda ao focar
           ),
         ),
         keyboardType: inputType,

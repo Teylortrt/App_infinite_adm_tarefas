@@ -6,7 +6,7 @@ class TelaInicial extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xFF1980BA), // Cor de fundo azul
+      backgroundColor: const Color(0xFF1980BA), // Cor de fundo azul
       body: SafeArea(
         child: Center(
           child: Column(
@@ -16,7 +16,7 @@ class TelaInicial extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Text(
+                  const Text(
                     'Infinite',
                     style: TextStyle(
                       fontSize: 32,
@@ -30,7 +30,7 @@ class TelaInicial extends StatelessWidget {
               ),
               const SizedBox(height: 20),
               // Subtítulo
-              Text(
+              const Text(
                 'Simples, flexível e poderoso. Mantenha tudo em um só lugar.',
                 style: TextStyle(
                   color: Colors.black,
@@ -50,7 +50,7 @@ class TelaInicial extends StatelessWidget {
                       // Lógica para iniciar sessão
                       print('Iniciar Sessão');
                     },
-                    child: Text(
+                    child: const Text(
                       'Iniciar Sessão',
                       style: TextStyle(color: Colors.black), // Aqui definimos a cor do texto
                     ),
@@ -61,7 +61,7 @@ class TelaInicial extends StatelessWidget {
                       // Lógica para criar conta
                       print('Criar Conta');
                     },
-                    child: Text(
+                    child: const Text(
                       'Criar Conta',
                       style: TextStyle(color: Colors.black), // Aqui também
                     ),
