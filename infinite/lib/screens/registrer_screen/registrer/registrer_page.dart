@@ -29,7 +29,7 @@ class RegistrerPage extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                // Adicionando a imagem acima do texto "Seja bem-vindo de volta"
+                // Adicionando a imagem acima do texto "Crie sua conta"
                 Image.asset(
                   'assets/infinite.png',
                   height: 150,  // Ajuste a altura conforme necessário
@@ -84,12 +84,15 @@ class RegistrerPage extends StatelessWidget {
                   onPressed: () {
                     if (_formKey.currentState!.validate()) {
                       // Lógica para criar a conta
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(content: Text('Conta criada com sucesso!')),
+                      );
                     }
                   },
                   style: FilledButton.styleFrom(
                     backgroundColor: Colors.black, // Cor preta
                   ),
-                  child: const Text('Entrar'),
+                  child: const Text('Criar Conta'),
                 ),
               ],
             ),
