@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:infinite/screens/login/login_page.dart'; 
+import 'package:infinite/screens/registrer_screen/registrer/registrer_page.dart';
+ 
 
 class TelaInicial extends StatelessWidget {
   const TelaInicial({super.key});
@@ -25,7 +28,7 @@ class TelaInicial extends StatelessWidget {
                     ),
                   ),
                   const SizedBox(width: 8),
-                  Image.asset('assets/infinite.png'), // Substitua por seu caminho
+                  Image.asset('assets/infinite.png'), // Substitua pelo seu caminho de imagem
                 ],
               ),
               const SizedBox(height: 20),
@@ -39,31 +42,37 @@ class TelaInicial extends StatelessWidget {
               ),
               const SizedBox(height: 40),
               // Imagem
-              Image.asset('assets/produtividade.png'), // Substitua por seu caminho
+              Image.asset('assets/produtividade.png'), // Substitua pelo seu caminho de imagem
               const SizedBox(height: 40),
               // Botões
-               Row(
+              Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   ElevatedButton(
                     onPressed: () {
-                      // Lógica para iniciar sessão
-                      print('Iniciar Sessão');
+                      // Navegar para a página de Login
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => LoginPage()),
+                      );
                     },
                     child: const Text(
                       'Iniciar Sessão',
-                      style: TextStyle(color: Colors.black), // Aqui definimos a cor do texto
+                      style: TextStyle(color: Colors.black), // Cor do texto
                     ),
                   ),
                   const SizedBox(width: 20),
                   ElevatedButton(
                     onPressed: () {
-                      // Lógica para criar conta
-                      print('Criar Conta');
+                      // Navegar para a página de Registro
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => RegistrerPage()),
+                      );
                     },
                     child: const Text(
                       'Criar Conta',
-                      style: TextStyle(color: Colors.black), // Aqui também
+                      style: TextStyle(color: Colors.black), // Cor do texto
                     ),
                   ),
                 ],
