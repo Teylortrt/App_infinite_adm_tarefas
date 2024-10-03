@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:email_validator/email_validator.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:infinite/screens/custom_text_field.dart';
-import 'package:infinite/principal/principal_page.dart';
+import 'package:infinite/screens/principal/principal_page.dart';
 import 'package:infinite/screens/registrer_screen/registrer/registrer_page.dart';
 import 'package:infinite/main.dart';
 
