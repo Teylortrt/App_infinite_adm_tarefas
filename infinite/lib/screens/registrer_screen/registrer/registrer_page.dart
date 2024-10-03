@@ -1,19 +1,36 @@
 import 'package:flutter/material.dart';
 import 'package:email_validator/email_validator.dart';
-import 'package:infinite/screens/login/login_page.dart';
-import 'package:infinite/screens/registrer_screen/registrer/registrer_page.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:infinite/screens/custom_text_field.dart';
-
-
+import 'package:infinite/principal/principal_page.dart';
 
 class RegistrerPage extends StatelessWidget {
   RegistrerPage({super.key});
 
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
-  final _repeatPasswordController = TextEditingController(); // Controlador para repetir senha
+  final _repeatPasswordController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
+
+  Future<void> _register(BuildContext context) async {
+    final prefs = await SharedPreferences.getInstance();
+    final email = _emailController.text;
+    final password = _passwordController.text;
+
+    // Salva o email e senha no SharedPreferences
+    await prefs.setString('email', email);
+    await prefs.setString('password', password);
+
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(content: Text('Conta criada com sucesso!')),
+    );
+
+    // Redireciona para a página principal
+    Navigator.pushReplacement(
+      context,
+      MaterialPageRoute(builder: (context) => PrincipalPage()),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -29,18 +46,17 @@ class RegistrerPage extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                // Adicionando a imagem acima do texto "Crie sua conta"
                 Image.asset(
                   'assets/infinite.png',
-                  height: 150,  // Ajuste a altura conforme necessário
+                  height: 150,
                 ),
-                const SizedBox(height: 16), // Espaço entre a imagem e o texto
+                const SizedBox(height: 16),
                 const Text(
                   'Crie sua conta',
                   textAlign: TextAlign.center,
                   style: TextStyle(fontSize: 24, color: Colors.black),
                 ),
-                const SizedBox(height: 50), // Ajuste o tamanho para alterar o posicionamento
+                const SizedBox(height: 50),
                 CustomTextField(
                   label: 'Email',
                   inputType: TextInputType.emailAddress,
@@ -66,7 +82,6 @@ class RegistrerPage extends StatelessWidget {
                   },
                 ),
                 const SizedBox(height: 16),
-                // Campo para repetir a senha
                 CustomTextField(
                   label: 'Repita sua senha',
                   inputType: TextInputType.visiblePassword,
@@ -83,14 +98,11 @@ class RegistrerPage extends StatelessWidget {
                 FilledButton(
                   onPressed: () {
                     if (_formKey.currentState!.validate()) {
-                      // Lógica para criar a conta
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(content: Text('Conta criada com sucesso!')),
-                      );
+                      _register(context);
                     }
                   },
                   style: FilledButton.styleFrom(
-                    backgroundColor: Colors.black, // Cor preta
+                    backgroundColor: Colors.black,
                   ),
                   child: const Text('Criar Conta'),
                 ),
