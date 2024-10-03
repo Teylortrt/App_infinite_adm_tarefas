@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:infinite/add_tasks/add_tasks_page.dart';
+import 'package:infinite/screens/add_tasks/add_tasks_page.dart';
+import 'package:infinite/repository/texto_repository.dart';
 
 class PrincipalPage extends StatefulWidget {
   @override
@@ -8,6 +9,27 @@ class PrincipalPage extends StatefulWidget {
 
 class _PrincipalPageState extends State<PrincipalPage> {
   List<Map<String, String>> _tasks = [];
+
+  void _deleteTask(int index) {
+    setState(() {
+      _tasks.removeAt(index);
+    });
+  }
+
+  void _editTask(int index) async {
+    final result = await Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => TaskScreen(task: _tasks[index]),
+      ),
+    );
+
+    if (result != null) {
+      setState(() {
+        _tasks[index] = result; // Atualiza a tarefa com os novos dados
+      });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -41,13 +63,6 @@ class _PrincipalPageState extends State<PrincipalPage> {
                       color: Colors.black54,
                     ),
                   ),
-                  Text(
-                    'João da Silva',
-                    style: TextStyle(
-                      fontSize: 24,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
                 ],
               ),
             ),
@@ -57,11 +72,24 @@ class _PrincipalPageState extends State<PrincipalPage> {
                 itemCount: _tasks.length,
                 itemBuilder: (context, index) {
                   return Card(
-                    color: Color(int.parse(_tasks[index]['color']!)), // Aplica a cor selecionada
+                    color: Color(int.parse(_tasks[index]['color']!)),
                     child: ListTile(
                       title: Text(_tasks[index]['title']!),
                       subtitle: Text(
                           'Tarefa: ${_tasks[index]['task']!}, Prazo: ${_tasks[index]['dueDate']}'),
+                      trailing: Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          IconButton(
+                            icon: Icon(Icons.edit, color: Colors.blue),
+                            onPressed: () => _editTask(index),
+                          ),
+                          IconButton(
+                            icon: Icon(Icons.delete, color: Colors.red),
+                            onPressed: () => _deleteTask(index),
+                          ),
+                        ],
+                      ),
                     ),
                   );
                 },
