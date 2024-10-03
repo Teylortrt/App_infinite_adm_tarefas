@@ -1,11 +1,29 @@
 import 'package:flutter/material.dart';
+import 'package:infinite/add_tasks/add_tasks_page.dart';
 
-class PrincipalPage extends StatelessWidget {
+class PrincipalPage extends StatefulWidget {
+  @override
+  _PrincipalPageState createState() => _PrincipalPageState();
+}
+
+class _PrincipalPageState extends State<PrincipalPage> {
+  List<Map<String, String>> _tasks = [];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Infinite'),
+        title: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            const Text('Infinite'),
+            const SizedBox(width: 8),
+            Image.asset(
+              'assets/infinite.png',
+              height: 30,
+            ),
+          ],
+        ),
         centerTitle: true,
       ),
       body: Padding(
@@ -13,42 +31,60 @@ class PrincipalPage extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
-              'Bem-vindo',
-              style: TextStyle(
-                fontSize: 16,
-                color: Colors.black54,
+            Center(
+              child: Column(
+                children: [
+                  Text(
+                    'Bem-vindo',
+                    style: TextStyle(
+                      fontSize: 16,
+                      color: Colors.black54,
+                    ),
+                  ),
+                  Text(
+                    'João da Silva',
+                    style: TextStyle(
+                      fontSize: 24,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ],
               ),
             ),
-            Text(
-              'João da Silva',
-              style: TextStyle(
-                fontSize: 24,
-                fontWeight: FontWeight.bold,
+            SizedBox(height: 20),
+            Expanded(
+              child: ListView.builder(
+                itemCount: _tasks.length,
+                itemBuilder: (context, index) {
+                  return Card(
+                    color: Color(int.parse(_tasks[index]['color']!)), // Aplica a cor selecionada
+                    child: ListTile(
+                      title: Text(_tasks[index]['title']!),
+                      subtitle: Text(
+                          'Tarefa: ${_tasks[index]['task']!}, Prazo: ${_tasks[index]['dueDate']}'),
+                    ),
+                  );
+                },
               ),
             ),
-            Expanded(child: Container()), // Placeholder for other content
           ],
         ),
       ),
-      bottomNavigationBar: BottomAppBar(
-        shape: CircularNotchedRectangle(),
-        notchMargin: 5.0,
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.end,
-          children: <Widget>[
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: FloatingActionButton(
-                onPressed: () {
-                  // Action for adding a new item
-                },
-                child: Icon(Icons.add),
-                backgroundColor: Colors.purpleAccent,
-              ),
-            ),
-          ],
-        ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () async {
+          final result = await Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => TaskScreen()),
+          );
+
+          if (result != null) {
+            setState(() {
+              _tasks.add(result);
+            });
+          }
+        },
+        child: Icon(Icons.add),
+        backgroundColor: Colors.purpleAccent,
       ),
     );
   }

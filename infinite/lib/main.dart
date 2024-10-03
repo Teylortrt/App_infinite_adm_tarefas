@@ -20,7 +20,7 @@ class MyApp extends StatelessWidget {
       routes: {
         '/': (context) => const TelaInicial(),  // Página inicial
         '/login': (context) => LoginPage(),  // Tela de login
-        '/register': (context) =>  RegistrerPage(),  // Tela de registro
+        '/registrer': (context) =>  RegistrerPage(),  // Tela de registro
         '/principal': (context) =>  PrincipalPage(),  // Página principal após login ou registro
       },
     );

@@ -4,6 +4,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:infinite/screens/custom_text_field.dart';
 import 'package:infinite/principal/principal_page.dart';
 import 'package:infinite/screens/registrer_screen/registrer/registrer_page.dart';
+import 'package:infinite/main.dart';
 
 class LoginPage extends StatelessWidget {
   LoginPage({super.key});
@@ -99,7 +100,7 @@ class LoginPage extends StatelessWidget {
                 const SizedBox(height: 16),
                 FilledButton(
                   onPressed: () {
-                    Navigator.pushNamed(context, '/register'); // Navega para a página de registro
+                    Navigator.pushNamed(context, '/registrer'); // Navega para a página de registro
                   },
                   style: FilledButton.styleFrom(
                     backgroundColor: Colors.black,
