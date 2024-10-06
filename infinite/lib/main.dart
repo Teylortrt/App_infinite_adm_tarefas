@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'add_tasks/add_tasks_page.dart';
-import 'package:infinite/principal/principal_page.dart';
+import 'package:infinite/screens/add_tasks/add_tasks_page.dart';
+import 'package:infinite/screens/principal/principal_page.dart';
 import 'package:infinite/screens/home/home_page.dart';
 import 'package:infinite/screens/login/login_page.dart';
 import 'package:infinite/screens/registrer_screen/registrer/registrer_page.dart';

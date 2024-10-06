@@ -18,20 +18,27 @@ class _TaskScreenState extends State<TaskScreen> {
       firstDate: DateTime(2000),
       lastDate: DateTime(2101),
     );
-    if (picked != null && picked != DateTime.now())
+    if (picked != null) {
       setState(() {
-        _dueDate = "${picked.toLocal()}".split(' ')[0];
+        _dueDate = "${picked.toLocal()}".split(' ')[0]; // Formata a data para o formato legível
       });
+    }
   }
 
   void _saveTask(BuildContext context) {
     if (_taskController.text.isNotEmpty && _titleController.text.isNotEmpty) {
+      // Verifica se os campos necessários foram preenchidos
       Navigator.pop(context, {
-        'title': _titleController.text,
-        'task': _taskController.text,
-        'dueDate': _dueDate,
+        'title': _titleController.text, // Passa o título da tarefa
+        'task': _taskController.text, // Passa a descrição da tarefa
+        'dueDate': _dueDate, // Passa a data escolhida
         'color': _selectedColor, // Passa a cor selecionada
       });
+    } else {
+      // Se algum campo estiver vazio, pode exibir um alerta ou aviso
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Por favor, preencha todos os campos.')),
+      );
     }
   }
 
@@ -42,7 +49,7 @@ class _TaskScreenState extends State<TaskScreen> {
         leading: IconButton(
           icon: Icon(Icons.arrow_back),
           onPressed: () {
-            Navigator.pop(context);
+            Navigator.pop(context); // Volta para a página anterior
           },
         ),
         title: Text('Tarefas'),
@@ -150,7 +157,7 @@ class _TaskScreenState extends State<TaskScreen> {
             Align(
               alignment: Alignment.bottomRight,
               child: FloatingActionButton(
-                onPressed: () => _saveTask(context),
+                onPressed: () => _saveTask(context), // Salva a tarefa ao clicar
                 backgroundColor: Colors.green,
                 child: Image.asset(
                   'assets/certinho.png',
