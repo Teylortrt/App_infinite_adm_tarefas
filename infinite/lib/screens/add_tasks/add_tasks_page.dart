@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 
 class TaskScreen extends StatefulWidget {
+  final Map<String, dynamic>? task; // Tarefa opcional para editar
+
+  TaskScreen({this.task}); // Construtor que aceita tarefa opcional
+
   @override
   _TaskScreenState createState() => _TaskScreenState();
 }
@@ -9,7 +13,19 @@ class _TaskScreenState extends State<TaskScreen> {
   final TextEditingController _taskController = TextEditingController();
   final TextEditingController _titleController = TextEditingController();
   String _dueDate = 'Data não definida';
-  String _selectedColor = '0xFF52B0E5'; // Cor padrão selecionada
+  String _selectedColor = '0xFF52B0E5'; // Cor padrão
+
+  @override
+  void initState() {
+    super.initState();
+    if (widget.task != null) {
+      // Se estiver editando, inicializa os campos com os valores da tarefa
+      _titleController.text = widget.task!['title'];
+      _taskController.text = widget.task!['task'];
+      _dueDate = widget.task!['dueDate'] ?? 'Data não definida';
+      _selectedColor = widget.task!['color'] ?? '0xFF52B0E5';
+    }
+  }
 
   void _selectDate(BuildContext context) async {
     final DateTime? picked = await showDatePicker(
@@ -20,22 +36,20 @@ class _TaskScreenState extends State<TaskScreen> {
     );
     if (picked != null) {
       setState(() {
-        _dueDate = "${picked.toLocal()}".split(' ')[0]; // Formata a data para o formato legível
+        _dueDate = "${picked.toLocal()}".split(' ')[0];
       });
     }
   }
 
   void _saveTask(BuildContext context) {
     if (_taskController.text.isNotEmpty && _titleController.text.isNotEmpty) {
-      // Verifica se os campos necessários foram preenchidos
       Navigator.pop(context, {
-        'title': _titleController.text, // Passa o título da tarefa
-        'task': _taskController.text, // Passa a descrição da tarefa
-        'dueDate': _dueDate, // Passa a data escolhida
-        'color': _selectedColor, // Passa a cor selecionada
+        'title': _titleController.text,
+        'task': _taskController.text,
+        'dueDate': _dueDate,
+        'color': _selectedColor,
       });
     } else {
-      // Se algum campo estiver vazio, pode exibir um alerta ou aviso
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text('Por favor, preencha todos os campos.')),
       );
@@ -52,7 +66,7 @@ class _TaskScreenState extends State<TaskScreen> {
             Navigator.pop(context); // Volta para a página anterior
           },
         ),
-        title: Text('Tarefas'),
+        title: Text(widget.task == null ? 'Nova Tarefa' : 'Editar Tarefa'),
         backgroundColor: Color(0xFF52B0E5),
       ),
       body: Container(
@@ -173,3 +187,4 @@ class _TaskScreenState extends State<TaskScreen> {
     );
   }
 }
+

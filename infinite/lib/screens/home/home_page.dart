@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:infinite/screens/login/login_page.dart'; 
-import 'package:infinite/screens/registrer_screen/registrer/registrer_page.dart';
+import 'package:infinite/screens/registrer_screen/registrer_page.dart';
  
 
 class TelaInicial extends StatelessWidget {
