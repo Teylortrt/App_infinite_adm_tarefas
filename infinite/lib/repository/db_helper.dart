@@ -54,4 +54,41 @@ class DBHelper {
       whereArgs: [email, senha],
     );
   }
+
+  // Atualizar uma tarefa pelo ID
+  static Future<void> updateTask(int id, Map<String, String> taskData) async {
+    final db = await getInstancia();
+    await db.update(
+      _tableName,
+      {
+        'tarefa': taskData['task']!,
+        'title': taskData['title']!,
+        'dueDate': taskData['dueDate']!,
+        'color': taskData['color']!,
+      },
+      where: 'id = ?',
+      whereArgs: [id],
+    );
+  }
+
+  // Excluir uma tarefa pelo ID
+  static Future<void> deleteTask(int id) async {
+    final db = await getInstancia();
+    await db.delete(
+      _tableName,
+      where: 'id = ?',
+      whereArgs: [id],
+    );
+  }
+
+  // Verificar as credenciais do utilizador
+  static Future<bool> verifyCredentials(String email, String senha) async {
+    final db = await getInstancia();
+    final result = await db.query(
+      _tableName,
+      where: 'email = ? AND senha = ?',
+      whereArgs: [email, senha],
+    );
+    return result.isNotEmpty;
+  }
 }

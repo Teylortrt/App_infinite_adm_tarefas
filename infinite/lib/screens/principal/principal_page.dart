@@ -39,7 +39,7 @@ class _PrincipalPageState extends State<PrincipalPage> {
   Future<void> _loadTasks() async {
     final tasks = await ContactRepository.getTasks(_email!, _senha!);
     setState(() {
-      _tasks = tasks;
+      _tasks = tasks.cast<Map<String, dynamic>>();
     });
   }
 
