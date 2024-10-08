@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:infinite/repository/text_repository.dart'; 
+import 'package:infinite/repository/text_repository.dart';
 import 'package:infinite/screens/add_tasks/add_tasks_page.dart';
 import 'package:sqflite/sqflite.dart';
-import 'package:infinite/repository/db_helper.dart'; // Importa a TaskScreen corretamente
+import 'package:infinite/repository/db_helper.dart';
 
 class PrincipalPage extends StatefulWidget {
   @override
@@ -31,22 +31,64 @@ class _PrincipalPageState extends State<PrincipalPage> {
 
     // Se email e senha estiverem disponíveis, carregar as tarefas do utilizador
     if (_email != null && _senha != null) {
-      _loadTasks();
+      await _loadTasks();
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Erro: email ou senha não definidos.')),
+      );
     }
   }
 
   // Carrega as tarefas do utilizador logado
   Future<void> _loadTasks() async {
-    final tasks = await ContactRepository.getTasks(_email!, _senha!);
-    setState(() {
-      _tasks = tasks.cast<Map<String, dynamic>>();
-    });
+    if (_email != null && _senha != null) {
+      try {
+        final tasks = await ContactRepository.getTasks(_email!, _senha!);
+        if (tasks != null) {
+          setState(() {
+            _tasks = List<Map<String, dynamic>>.from(tasks);
+          });
+        }
+      } catch (e) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('Erro ao carregar as tarefas: $e')),
+        );
+      }
+    }
   }
 
   // Adiciona uma nova tarefa
   Future<void> _addTask(Map<String, dynamic> taskData) async {
-    await ContactRepository.insertTask(_email!, _senha!, taskData);
-    _loadTasks(); // Recarrega as tarefas
+    try {
+      final result = await someAsyncTaskFunction(taskData);
+
+      if (result != null && result is Map<String, dynamic>) {
+        // Adiciona a tarefa diretamente na lista local
+        setState(() {
+          _tasks.add(result); // Adiciona a nova tarefa na lista local
+        });
+
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('Tarefa adicionada com sucesso!')),
+        );
+      } else {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('Erro: Não foi possível adicionar a tarefa.')),
+        );
+      }
+    } catch (e) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Erro: Ocorreu um problema. $e')),
+      );
+    }
+  }
+
+  // Exemplo de função assíncrona simulada para adicionar a tarefa (substitua pela lógica real)
+  Future<Map<String, dynamic>?> someAsyncTaskFunction(
+      Map<String, dynamic> taskData) async {
+    await Future.delayed(
+        Duration(seconds: 1)); // Simula o tempo de espera de uma operação
+    return taskData; // Retorna os dados da tarefa como se tivesse sido adicionada com sucesso
   }
 
   // Edita uma tarefa existente
@@ -54,7 +96,8 @@ class _PrincipalPageState extends State<PrincipalPage> {
     final result = await Navigator.push(
       context,
       MaterialPageRoute(
-        builder: (context) => TaskScreen(task: _tasks[index]), // Passa a tarefa para edição
+        builder: (context) =>
+            TaskScreen(task: _tasks[index]), // Passa a tarefa para edição
       ),
     );
 
@@ -88,7 +131,8 @@ class _PrincipalPageState extends State<PrincipalPage> {
                   return Card(
                     child: ListTile(
                       title: Text(_tasks[index]['title']),
-                      subtitle: Text('Tarefa: ${_tasks[index]['task']}, Prazo: ${_tasks[index]['dueDate']}'),
+                      subtitle: Text(
+                          'Tarefa: ${_tasks[index]['task']}, Prazo: ${_tasks[index]['dueDate']}'),
                       trailing: Row(
                         mainAxisSize: MainAxisSize.min,
                         children: [
@@ -114,11 +158,13 @@ class _PrincipalPageState extends State<PrincipalPage> {
         onPressed: () async {
           final result = await Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => TaskScreen()), // Abre a tela de adicionar tarefa
+            MaterialPageRoute(
+                builder: (context) =>
+                    TaskScreen()), // Abre a tela de adicionar tarefa
           );
 
           if (result != null) {
-            _addTask(result); // Adiciona a nova tarefa
+            await _addTask(result); // Adiciona a nova tarefa
           }
         },
         child: Icon(Icons.add),
@@ -127,3 +173,4 @@ class _PrincipalPageState extends State<PrincipalPage> {
     );
   }
 }
+
