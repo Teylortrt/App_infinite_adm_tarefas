@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 class TaskScreen extends StatefulWidget {
   final Map<String, dynamic>? task; // Tarefa opcional para editar
 
-  TaskScreen({this.task}); // Construtor que aceita tarefa opcional
+  const TaskScreen({super.key, this.task}); // Construtor que aceita tarefa opcional
 
   @override
   _TaskScreenState createState() => _TaskScreenState();
@@ -51,7 +51,7 @@ class _TaskScreenState extends State<TaskScreen> {
       });
     } else {
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Por favor, preencha todos os campos.')),
+        const SnackBar(content: Text('Por favor, preencha todos os campos.')),
       );
     }
   }
@@ -61,17 +61,17 @@ class _TaskScreenState extends State<TaskScreen> {
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
-          icon: Icon(Icons.arrow_back),
+          icon: const Icon(Icons.arrow_back),
           onPressed: () {
             Navigator.pop(context); // Volta para a página anterior
           },
         ),
         title: Text(widget.task == null ? 'Nova Tarefa' : 'Editar Tarefa'),
-        backgroundColor: Color(0xFF52B0E5),
+        backgroundColor: const Color(0xFF52B0E5),
       ),
       body: Container(
-        color: Color(0xFF1980BA),
-        padding: EdgeInsets.all(16.0),
+        color: const Color(0xFF1980BA),
+        padding: const EdgeInsets.all(16.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -81,45 +81,45 @@ class _TaskScreenState extends State<TaskScreen> {
                 height: 100,
               ),
             ),
-            SizedBox(height: 20),
-            Text(
+            const SizedBox(height: 20),
+            const Text(
               'Descrição da Tarefa',
               style: TextStyle(color: Colors.black, fontSize: 18),
             ),
-            SizedBox(height: 10),
+            const SizedBox(height: 10),
             TextField(
               controller: _titleController,
-              decoration: InputDecoration(
+              decoration: const InputDecoration(
                 hintText: 'Insira o título da tarefa aqui',
                 filled: true,
                 fillColor: Colors.white,
                 border: OutlineInputBorder(),
               ),
             ),
-            SizedBox(height: 20),
-            Text(
+            const SizedBox(height: 20),
+            const Text(
               'O que deve ser feito?',
               style: TextStyle(color: Colors.black, fontSize: 18),
             ),
-            SizedBox(height: 10),
+            const SizedBox(height: 10),
             TextField(
               controller: _taskController,
-              decoration: InputDecoration(
+              decoration: const InputDecoration(
                 hintText: 'Insira sua nova tarefa aqui',
                 filled: true,
                 fillColor: Colors.white,
                 border: OutlineInputBorder(),
               ),
             ),
-            SizedBox(height: 20),
-            Text(
+            const SizedBox(height: 20),
+            const Text(
               'Prazo',
               style: TextStyle(color: Colors.black, fontSize: 18),
             ),
             GestureDetector(
               onTap: () => _selectDate(context),
               child: Container(
-                padding: EdgeInsets.symmetric(vertical: 15.0, horizontal: 10.0),
+                padding: const EdgeInsets.symmetric(vertical: 15.0, horizontal: 10.0),
                 decoration: BoxDecoration(
                   color: Colors.white,
                   borderRadius: BorderRadius.circular(5),
@@ -129,7 +129,7 @@ class _TaskScreenState extends State<TaskScreen> {
                   children: [
                     Text(
                       _dueDate,
-                      style: TextStyle(color: Colors.black),
+                      style: const TextStyle(color: Colors.black),
                     ),
                     Image.asset(
                       'assets/calendario.png',
@@ -140,14 +140,14 @@ class _TaskScreenState extends State<TaskScreen> {
                 ),
               ),
             ),
-            SizedBox(height: 20),
-            Text(
+            const SizedBox(height: 20),
+            const Text(
               'Escolha uma cor',
               style: TextStyle(color: Colors.black, fontSize: 18),
             ),
             DropdownButton<String>(
               value: _selectedColor,
-              items: [
+              items: const [
                 DropdownMenuItem(
                   value: '0xFF52B0E5',
                   child: Text('Azul Claro'),
@@ -167,7 +167,7 @@ class _TaskScreenState extends State<TaskScreen> {
                 });
               },
             ),
-            Spacer(),
+            const Spacer(),
             Align(
               alignment: Alignment.bottomRight,
               child: FloatingActionButton(
@@ -180,7 +180,7 @@ class _TaskScreenState extends State<TaskScreen> {
                 ),
               ),
             ),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
           ],
         ),
       ),

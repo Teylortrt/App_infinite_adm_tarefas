@@ -6,6 +6,8 @@ import 'package:sqflite/sqflite.dart';
 import 'package:infinite/repository/db_helper.dart';
 
 class PrincipalPage extends StatefulWidget {
+  const PrincipalPage({super.key});
+
   @override
   _PrincipalPageState createState() => _PrincipalPageState();
 }
@@ -34,7 +36,7 @@ class _PrincipalPageState extends State<PrincipalPage> {
       await _loadTasks();
     } else {
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Erro: email ou senha não definidos.')),
+        const SnackBar(content: Text('Erro: email ou senha não definidos.')),
       );
     }
   }
@@ -44,12 +46,10 @@ class _PrincipalPageState extends State<PrincipalPage> {
     if (_email != null && _senha != null) {
       try {
         final tasks = await ContactRepository.getTasks(_email!, _senha!);
-        if (tasks != null) {
-          setState(() {
-            _tasks = List<Map<String, dynamic>>.from(tasks);
-          });
-        }
-      } catch (e) {
+        setState(() {
+          _tasks = List<Map<String, dynamic>>.from(tasks);
+        });
+            } catch (e) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(content: Text('Erro ao carregar as tarefas: $e')),
         );
@@ -62,18 +62,18 @@ class _PrincipalPageState extends State<PrincipalPage> {
     try {
       final result = await someAsyncTaskFunction(taskData);
 
-      if (result != null && result is Map<String, dynamic>) {
+      if (result != null) {
         // Adiciona a tarefa diretamente na lista local
         setState(() {
           _tasks.add(result); // Adiciona a nova tarefa na lista local
         });
 
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Tarefa adicionada com sucesso!')),
+          const SnackBar(content: Text('Tarefa adicionada com sucesso!')),
         );
       } else {
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Erro: Não foi possível adicionar a tarefa.')),
+          const SnackBar(content: Text('Erro: Não foi possível adicionar a tarefa.')),
         );
       }
     } catch (e) {
@@ -87,7 +87,7 @@ class _PrincipalPageState extends State<PrincipalPage> {
   Future<Map<String, dynamic>?> someAsyncTaskFunction(
       Map<String, dynamic> taskData) async {
     await Future.delayed(
-        Duration(seconds: 1)); // Simula o tempo de espera de uma operação
+        const Duration(seconds: 1)); // Simula o tempo de espera de uma operação
     return taskData; // Retorna os dados da tarefa como se tivesse sido adicionada com sucesso
   }
 
@@ -117,7 +117,7 @@ class _PrincipalPageState extends State<PrincipalPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Tarefas'),
+        title: const Text('Tarefas'),
         centerTitle: true,
       ),
       body: Padding(
@@ -137,11 +137,11 @@ class _PrincipalPageState extends State<PrincipalPage> {
                         mainAxisSize: MainAxisSize.min,
                         children: [
                           IconButton(
-                            icon: Icon(Icons.edit),
+                            icon: const Icon(Icons.edit),
                             onPressed: () => _editTask(index),
                           ),
                           IconButton(
-                            icon: Icon(Icons.delete),
+                            icon: const Icon(Icons.delete),
                             onPressed: () => _deleteTask(_tasks[index]['id']),
                           ),
                         ],
@@ -167,8 +167,8 @@ class _PrincipalPageState extends State<PrincipalPage> {
             await _addTask(result); // Adiciona a nova tarefa
           }
         },
-        child: Icon(Icons.add),
         backgroundColor: Colors.blue,
+        child: Icon(Icons.add),
       ),
     );
   }

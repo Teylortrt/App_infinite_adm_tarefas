@@ -12,8 +12,8 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: const SplashScreen(),  // Define a SplashScreen como a tela inicial
+    return const MaterialApp(
+      home: SplashScreen(),  // Define a SplashScreen como a tela inicial
     );
   }
 }
